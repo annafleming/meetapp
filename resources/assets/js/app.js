@@ -13,6 +13,8 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
+Vue.use(require('vue-resource'));
+
 Vue.component('user-list', require('./components/UserList.vue'));
 Vue.component('meeting-list', require('./components/MeetingList.vue'));
 

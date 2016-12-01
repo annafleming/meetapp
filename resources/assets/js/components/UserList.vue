@@ -4,7 +4,7 @@
             <div class="panel-heading">Users</div>
             <div class="panel-body">
                 <div class="list-group">
-                    <a v-for="user in users" type="button" class="list-group-item" href="#">{{ user }}</a>
+                    <a v-for="user in users" type="button" class="list-group-item" href="#">{{ user.name }}</a>
                 </div>
             </div>
         </div>
@@ -20,7 +20,19 @@
         data(){
             return{
                 msg:'hello vue',
-                users: ['Joshua Jones', 'Anna Fleming', 'David Angel']
+                users: []
+            }
+        },
+        created(){
+            this.fetchData();
+
+        },
+        methods: {
+            fetchData: function () {
+                self = this;
+                this.$http.get('/users').then((response) => {
+                    self.users = response.body;
+                });
             }
         }
     }
