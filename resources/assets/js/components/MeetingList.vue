@@ -3,32 +3,26 @@
         <div class="panel panel-default">
             <div class="panel-heading">Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></div>
             <div class="panel-body">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="meeting in meetings">
-                        <td>{{ meeting.title }}</td>
-                        <td>{{ meeting.date }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div v-for="meeting in meetings">
+                    <meeting :meeting="meeting"></meeting>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+
+    import Meeting from './Meeting.vue';
+
+
     export default{
+        components: { Meeting },
         data(){
             return{
                 meetings: [
-                    {title: 'Future Meeting', date: '10 Dec 2016'},
-                    {title: 'Meeting Title', date: '15 Nov 2016'},
-                    {title: 'Another Meeting Title', date: '3 Nov 2016'},
+                    {username: 'Adam Williams', date: '10 Dec 2016'},
+                    {username: 'Joshua Jones', date: '15 Nov 2016'},
+                    {username: 'Everett Green', date: '3 Nov 2016'},
                 ]
             }
         }
