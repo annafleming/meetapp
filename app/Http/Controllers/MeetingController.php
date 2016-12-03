@@ -16,7 +16,11 @@ class MeetingController extends Controller
      */
     public function index(Request $request)
     {
-        return Auth::user()->meetings()->orderBy('scheduled_at', 'desc')->get();
+        $meetings = Auth::user()->meetings()->orderBy('scheduled_at', 'desc');
+        if($request->get('limit')) {
+            $meetings->limit($request->get('limit'));
+        }
+        return $meetings->get();
     }
 
     /**
