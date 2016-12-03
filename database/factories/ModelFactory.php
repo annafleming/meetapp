@@ -21,3 +21,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Meeting::class, function (Faker\Generator $faker) {
+    return [
+        'scheduled_at' => $faker->dateTimeThisYear(),
+        'agenda' => $faker->paragraph(3)
+    ];
+});
