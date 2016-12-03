@@ -1,13 +1,9 @@
 <template>
     <div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></div>
-            <div class="panel-body">
-                <div v-for="meeting in meetings">
-                    <meeting :meeting="meeting"></meeting>
-                </div>
+            <h3>Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></h3>
+            <div v-for="meeting in meetings">
+                <meeting :meeting="meeting"></meeting>
             </div>
-        </div>
     </div>
 </template>
 <script>
