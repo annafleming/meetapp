@@ -6,3 +6,9 @@
 
 // Animations
 @import "node_modules/animate.css/animate";
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}

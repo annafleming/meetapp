@@ -10729,4 +10729,10 @@ button.close {
   animation-name: slideOutUp;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */
