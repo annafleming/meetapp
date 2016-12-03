@@ -11,19 +11,22 @@
     </div>
 </template>
 <script>
-
     import Meeting from './Meeting.vue';
-
-
-    export default{
+    export default {
         components: { Meeting },
         data(){
             return{
-                meetings: [
-                    {username: 'Adam Williams', date: '10 Dec 2016'},
-                    {username: 'Joshua Jones', date: '15 Nov 2016'},
-                    {username: 'Everett Green', date: '3 Nov 2016'},
-                ]
+                meetings: []
+            }
+        },
+        created() {
+            this.fetchData();
+        },
+        methods: {
+            fetchData: function () {
+                this.$http.get('/api/meetings').then((response) => {
+                    this.meetings = response.body;
+                });
             }
         }
     }

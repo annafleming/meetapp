@@ -16,22 +16,19 @@
     }
 </style>
 <script>
-    export default{
-        data(){
-            return{
-                msg:'hello vue',
+    export default {
+        data() {
+            return {
                 users: []
             }
         },
         created(){
             this.fetchData();
-
         },
         methods: {
             fetchData: function () {
-                self = this;
-                this.$http.get('/users').then((response) => {
-                    self.users = response.body;
+                this.$http.get('/api/users').then((response) => {
+                    this.users = response.body;
                 });
             }
         }
