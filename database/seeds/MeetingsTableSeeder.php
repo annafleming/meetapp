@@ -15,10 +15,12 @@ class MeetingsTableSeeder extends Seeder
         DB::table('meetings')->delete();
         $users = User::all();
         foreach ($users as $user) {
-            $meeting = factory(\App\Meeting::class)->create();
-            $randomUser = User::where('id','!=',$user->id)->orderBy(DB::raw('RAND()'))->first();
-            $meeting->users()->attach([$user->id, $randomUser->id]);
-            $meeting->save();
+            foreach (range(1,5) as $index) {
+                $meeting = factory(\App\Meeting::class)->create();
+                $randomUser = User::where('id','!=',$user->id)->orderBy(DB::raw('RAND()'))->first();
+                $meeting->users()->attach([$user->id, $randomUser->id]);
+                $meeting->save();
+            }
         }
     }
 }
