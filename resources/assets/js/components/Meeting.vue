@@ -9,6 +9,7 @@
                     <span class="pull-right" v-if="!folded">Hide</span>
                 </h3>
             </div>
+            <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
                 <p>Date: {{ meeting.scheduled_at }} Participants: {{ meeting.participants }}</p>
                 <div class="col-md-4">
@@ -29,13 +30,28 @@
                     </div>
                 </div>
             </div>
+            </transition>
         </div>
         </form>
     </div>
 </template>
 <style>
     .panel-heading { cursor: pointer; }
+    .panel-body { overflow: hidden; }
     .panel-body textarea { border: none; box-shadow: none; }
+
+    .slide-fade-enter-active {
+      transition: all .5s ease;
+      max-height: 1000px;
+    }
+    .slide-fade-leave-active {
+      transition: all .2s ease;
+    }
+    .slide-fade-enter, .slide-fade-leave-active {
+      transform: translateY(-20px);
+      opacity: 0;
+      max-height: 0;
+    }
 </style>
 <script>
 
