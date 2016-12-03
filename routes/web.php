@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/users', function (Request $request) {
-    return App\User::all();
+Route::group(['middleware'=>'auth', 'prefix'=>'api'],function () {
+
+    Route::get('users', function (Request $request) {
+        return App\User::all();
+    });
+
+    Route::get('meetings', 'MeetingController@index');
+
 });
