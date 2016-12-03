@@ -1,5 +1,6 @@
 <template>
     <div>
+        <form>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title" v-on:click="folded = !folded">
@@ -11,40 +12,30 @@
             <div class="panel-body" v-show="!folded">
                 <p>Date: {{ meeting.scheduled_at }} Participants: {{ meeting.participants }}</p>
                 <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Agenda</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{ meeting.agenda }}
-                        </div>
+                    <div class="form-group">
+                    <label>Agenda</label>
+                    <textarea class="form-control" rows="8">{{ meeting.agenda }}</textarea>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Takeaways</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{ meeting.takeaways }}
-                        </div>
+                    <div class="form-group">
+                    <label>Takeaways</label>
+                    <textarea class="form-control" rows="8">{{ meeting.takeaways }}</textarea>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Notes</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{ meeting.notes }}
-                        </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea class="form-control" rows="20">{{ meeting.notes }}</textarea>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </template>
 <style>
     .panel-heading { cursor: pointer; }
+    .panel-body textarea { border: none; box-shadow: none; }
 </style>
 <script>
 
@@ -52,7 +43,6 @@
         props: {
             meeting: Object,
         },
-
         data(){
             return {
                 folded: true,
