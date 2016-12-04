@@ -22,6 +22,16 @@
                     <label>Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
+
+                    <div class="form-group" v-bind:class="{ changed: isChanged('scheduled_at') }">
+                        <label>Meeting Date</label>
+                        <input class="form-control" type="date" v-model="meeting.scheduled_at">
+                    </div>
+
+                    <div class="form-group" v-bind:class="{ changed: isChanged('completed') }">
+                        <label>Meeting Completed</label>
+                        <input class="form-control" type="checkbox" v-model="meeting.completed">
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group" v-bind:class="{ changed: isChanged('notes') }">
