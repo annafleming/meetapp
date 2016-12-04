@@ -21,9 +21,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>'auth', 'prefix'=>'api'],function () {
 
-    Route::get('users', function (Request $request) {
-        return App\User::all();
-    });
+    Route::resource('user', 'UserController');
 
     Route::get('meetings', 'MeetingController@index');
 

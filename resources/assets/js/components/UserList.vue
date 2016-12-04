@@ -21,7 +21,7 @@
         },
         methods: {
             fetchData: function () {
-                this.$http.get('/api/users').then((response) => {
+                this.$http.get('/api/user').then((response) => {
                     this.users = response.body;
                 });
             }
