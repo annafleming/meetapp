@@ -13,18 +13,18 @@
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
                     <label>Agenda</label>
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" v-bind:class="{ changed: isChanged('takeaways') }">
                     <label>Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="form-group">
+                    <div class="form-group" v-bind:class="{ changed: isChanged('notes') }">
                         <label>Notes</label>
                         <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
                     </div>
@@ -57,6 +57,9 @@
       opacity: 0;
       max-height: 0;
     }
+    .form-group.changed label{
+        color: darkred;
+    }
 </style>
 <script>
 
@@ -71,16 +74,25 @@
             }
         },
         created() {
+            for (var key in this.meeting) {
+                if (this.meeting[key] === null)
+                    this.meeting[key] = '';
+            }
             this.oldData = Vue.util.extend({},this.meeting);
         },
         computed: {
             participants: function() {
                 return this.meeting.users.map(function(user) {return user.name;}).join(', ');
-            }
+            },
         },
         methods: {
             saveMeeting: function () {
                 console.log(this.meeting);
+            },
+            isChanged: function (field) {
+                if (this.oldData[field] !== 'undefined'){
+                    return this.oldData[field] != this.meeting[field];
+                }
             }
         }
     }
