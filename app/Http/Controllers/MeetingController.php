@@ -41,7 +41,7 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Meeting::find($request->id)->update($request->all());
     }
 
     /**

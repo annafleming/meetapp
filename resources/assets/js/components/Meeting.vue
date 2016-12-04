@@ -87,7 +87,11 @@
         },
         methods: {
             saveMeeting: function () {
-                console.log(this.meeting);
+                self = this;
+                this.$http.post('/api/meeting', self.meeting).then((response) => {
+                    self.oldData = Vue.util.extend({},self.meeting);
+                }, (response) => {
+                });
             },
             isChanged: function (field) {
                 if (this.oldData[field] !== 'undefined'){
