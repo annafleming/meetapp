@@ -27,7 +27,7 @@
             fetchData: function (limit) {
                 if (limit == null){ var limit = 0; }
                 if (limit == 0){ this.showingAll = true; } else { this.showingAll = false; }
-                this.$http.get('/api/meetings?limit=' + limit).then((response) => {
+                this.$http.get('/api/meeting?limit=' + limit).then((response) => {
                     this.meetings = response.body;
                 });
             }

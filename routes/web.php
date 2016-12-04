@@ -22,7 +22,6 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware'=>'auth', 'prefix'=>'api'],function () {
 
     Route::resource('user', 'UserController');
-
-    Route::get('meetings', 'MeetingController@index');
+    Route::resource('meeting', 'MeetingController');
 
 });
