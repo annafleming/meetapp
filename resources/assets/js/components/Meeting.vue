@@ -29,6 +29,11 @@
                         <textarea class="form-control" rows="20">{{ meeting.notes }}</textarea>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="pull-right btn btn-primary btn-s">Save</button>
+                    </div>
+                </div>
             </div>
             </transition>
         </div>
