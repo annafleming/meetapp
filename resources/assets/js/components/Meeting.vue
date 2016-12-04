@@ -15,23 +15,23 @@
                 <div class="col-md-4">
                     <div class="form-group">
                     <label>Agenda</label>
-                    <textarea class="form-control" rows="8">{{ meeting.agenda }}</textarea>
+                    <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
                     <div class="form-group">
                     <label>Takeaways</label>
-                    <textarea class="form-control" rows="8">{{ meeting.takeaways }}</textarea>
+                    <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Notes</label>
-                        <textarea class="form-control" rows="20">{{ meeting.notes }}</textarea>
+                        <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <button class="pull-right btn btn-primary btn-s">Save</button>
+                        <button class="pull-right btn btn-primary btn-s" v-on:click="saveMeeting()">Save</button>
                     </div>
                 </div>
             </div>
@@ -67,11 +67,20 @@
         data(){
             return {
                 folded: true,
+                oldData : Object,
             }
+        },
+        created() {
+            this.oldData = Vue.util.extend({},this.meeting);
         },
         computed: {
             participants: function() {
                 return this.meeting.users.map(function(user) {return user.name;}).join(', ');
+            }
+        },
+        methods: {
+            saveMeeting: function () {
+                console.log(this.meeting);
             }
         }
     }
