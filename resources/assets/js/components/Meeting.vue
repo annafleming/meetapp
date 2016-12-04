@@ -2,16 +2,16 @@
     <div>
         <form>
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title" v-on:click="folded = !folded">
-                    {{ meeting.scheduled_at }}
+            <div class="list-group" >
+                <a href="#" class="list-group-item" v-on:click="folded = !folded">
                     <span class="pull-right" v-if="folded">Show</span>
                     <span class="pull-right" v-if="!folded">Hide</span>
-                </h3>
+                    <h4 class="list-group-item-heading">{{ participants }}</h4>
+                    <p class="list-group-item-text">{{ meeting.scheduled_at }}</p>
+                </a>
             </div>
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
-                <p>Date: {{ meeting.scheduled_at }} Participants: {{ meeting.participants }}</p>
                 <div class="col-md-4">
                     <div class="form-group">
                     <label>Agenda</label>
@@ -62,6 +62,11 @@
         data(){
             return {
                 folded: true,
+            }
+        },
+        computed: {
+            participants: function() {
+                return this.meeting.users.map(function(user) {return user.name;}).join(', ');
             }
         }
     }

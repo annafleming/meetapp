@@ -20,7 +20,7 @@ class MeetingController extends Controller
         if($request->get('limit')) {
             $meetings->limit($request->get('limit'));
         }
-        return $meetings->get();
+        return $meetings->with('users')->get();
     }
 
     /**
