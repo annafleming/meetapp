@@ -3,7 +3,7 @@
         <form>
         <div class="panel panel-default">
             <div class="list-group" >
-                <a href="#" class="list-group-item" v-on:click="folded = !folded">
+                <a href="#" class="list-group-item" v-on:click="folded = !folded" v-bind:class="{ active: !folded }">
                     <span class="pull-right" v-if="folded">Show</span>
                     <span class="pull-right" v-if="!folded">Hide</span>
                     <h4 class="list-group-item-heading">{{ participants }}</h4>
