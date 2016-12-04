@@ -29,8 +29,11 @@
                     </div>
 
                     <div class="form-group" v-bind:class="{ changed: isChanged('completed') }">
-                        <label>Meeting Completed</label>
-                        <input class="form-control" type="checkbox" v-model="meeting.completed">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="meeting.completed"> Meeting Completed
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8">
