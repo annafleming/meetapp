@@ -128,6 +128,8 @@
                     return this.oldData[field] != this.meeting[field];
                 }
             },
+            updateSelected(value) {
+               this.meeting.users = value;
             }
         }
     }
