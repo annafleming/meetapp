@@ -15,8 +15,7 @@ require('./bootstrap');
 
 Vue.use(require('vue-resource'));
 
-Vue.component('user-list', require('./components/UserList.vue'));
-Vue.component('meeting-list', require('./components/MeetingList.vue'));
+Vue.component('meet-app', require('./components/MeetApp.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -13,6 +13,9 @@
 <script>
     import Meeting from './Meeting.vue';
     export default {
+        props: {
+            users: Array
+        },
         components: { Meeting },
         data(){
             return{

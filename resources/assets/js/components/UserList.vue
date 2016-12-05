@@ -13,19 +13,13 @@
     export default {
         data() {
             return {
-                users: [],
                 selectedUsers: []
             }
         },
-        created(){
-            this.fetchData();
+        props: {
+            users: Array
         },
         methods: {
-            fetchData: function () {
-                this.$http.get('/api/user').then((response) => {
-                    this.users = response.body;
-                });
-            },
             toggleSelect: function(user) {
                 var index = this.selectedUsers.indexOf(user);
                 if (index === -1) {
