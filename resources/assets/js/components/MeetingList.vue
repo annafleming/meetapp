@@ -2,7 +2,7 @@
     <div>
             <h3>Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></h3>
             <div v-for="meeting in meetings">
-                <meeting :meeting="meeting"></meeting>
+                <meeting :meeting="meeting" :users="users"></meeting>
             </div>
         <div class="text-center">
             <a v-if="!showingAll" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>

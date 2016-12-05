@@ -16,10 +16,13 @@
                     <label>Participants</label>
                     <multiselect
                             @input="updateSelected"
-                            multiple="true"
-                            :options="['one', 'two', 'three']"
+                            :multiple="true"
+                            :options="users"
                             :value="meeting.users"
                             placeholder="Select participants"
+                            label="name"
+                            key="id"
+                            :hideSelected="true"
                     ></multiselect>
                 </div>
                 <div class="col-md-4">
@@ -90,6 +93,7 @@
         components: { Multiselect },
         props: {
             meeting: Object,
+            users: Array
         },
         data(){
             return {
