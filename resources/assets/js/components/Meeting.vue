@@ -15,14 +15,16 @@
                 <div class="col-md-12">
                     <label>Participants</label>
                     <multiselect
-                            @input="updateSelected"
-                            :multiple="true"
                             :options="users"
                             :value="meeting.users"
+                            :multiple="true"
+                            :searchable="true"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            @input="updateSelected"
                             placeholder="Select participants"
                             label="name"
-                            key="id"
-                            :hideSelected="true"
+                            track-by="id"
                     ></multiselect>
                 </div>
                 <div class="col-md-4">
@@ -126,8 +128,6 @@
                     return this.oldData[field] != this.meeting[field];
                 }
             },
-            updateSelected() {
-                console.log('Test');
             }
         }
     }
