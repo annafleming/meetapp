@@ -12,6 +12,16 @@
             </div>
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
+                <div class="col-md-12">
+                    <label>Participants</label>
+                    <multiselect
+                            @input="updateSelected"
+                            multiple="true"
+                            :options="['one', 'two', 'three']"
+                            :value="meeting.users"
+                            placeholder="Select participants"
+                    ></multiselect>
+                </div>
                 <div class="col-md-4">
                     <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
                     <label>Agenda</label>
@@ -75,8 +85,9 @@
     }
 </style>
 <script>
-
+    import Multiselect from 'vue-multiselect';
     export default{
+        components: { Multiselect },
         props: {
             meeting: Object,
         },
@@ -110,6 +121,9 @@
                 if (this.oldData[field] !== 'undefined'){
                     return this.oldData[field] != this.meeting[field];
                 }
+            },
+            updateSelected() {
+                console.log('Test');
             }
         }
     }
