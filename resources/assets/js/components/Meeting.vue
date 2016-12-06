@@ -6,8 +6,8 @@
                 <a href="#" class="list-group-item" v-on:click="folded = !folded" :class="{ active: !folded }">
                     <span class="pull-right" v-if="folded">Show</span>
                     <span class="pull-right" v-if="!folded">Hide</span>
-                    <h4 class="list-group-item-heading">{{ participants }}</h4>
-                    <p class="list-group-item-text">{{ meeting.scheduled_at }}</p>
+                    <h4 class="list-group-item-heading">{{ participants || 'Add participants' }}</h4>
+                    <p class="list-group-item-text">{{ meeting.scheduled_at || 'Add meeting date' }}</p>
                 </a>
             </div>
             <transition name="slide-fade">
@@ -19,7 +19,7 @@
                         <input class="form-control" type="date" v-model="meeting.scheduled_at">
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('completed') }">
+                    <div class="form-group" :class="{ changed: isChanged('completed') }" v-if="meeting.id">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" v-model="meeting.completed"> Meeting Completed
@@ -32,7 +32,7 @@
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('takeaways') }">
+                    <div class="form-group" :class="{ changed: isChanged('takeaways') }" v-if="meeting.id">
                     <label><i class="fa fa-check-square-o"></i> Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
@@ -56,7 +56,7 @@
                         ></multiselect>
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('notes') }">
+                    <div class="form-group" :class="{ changed: isChanged('notes') }" v-if="meeting.id">
                         <label><i class="fa fa-pencil-square-o"></i> Notes</label>
                         <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
                     </div>
@@ -123,6 +123,9 @@
                     this.meeting[key] = '';
             }
             this.oldData = Vue.util.extend({},this.meeting);
+            if (!this.meeting.id) {
+                this.folded = false;
+            }
         },
         computed: {
             participants: function() {
@@ -132,10 +135,23 @@
         methods: {
             saveMeeting: function () {
                 this.isSaving = true;
+                if (this.meeting.id)
+                    this.updateMeeting();
+                else
+                    this.createMeeting();
+            },
+            updateMeeting: function () {
                 self = this;
                 this.$http.put('/api/meeting/'+self.meeting.id, self.meeting).then((response) => {
                     self.oldData = Vue.util.extend({},self.meeting);
                     self.isSaving = false;
+                }, (response) => {
+                });
+            },
+            createMeeting: function () {
+                self = this;
+                this.$http.post('/api/meeting', self.meeting).then((response) => {
+                    self.$parent.hideNewMeeting();
                 }, (response) => {
                 });
             },

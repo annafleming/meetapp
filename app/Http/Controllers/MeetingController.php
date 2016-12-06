@@ -30,7 +30,13 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        //
+        $meeting = new Meeting;
+        foreach (['scheduled_at', 'agenda'] as $field) {
+            $meeting->$field = null;
+        }
+        $meeting->id = null;
+        $meeting->users = [Auth::user()];
+        return $meeting;
     }
 
     /**
@@ -41,7 +47,9 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-
+        $meeting = Meeting::create($request->all());
+        $userIds = array_map(function($item) {return $item['id'];}, $request->get('users'));
+        $meeting->users()->sync($userIds);
     }
 
     /**

@@ -1,9 +1,12 @@
 <template>
     <div>
-            <h3><i class="fa fa-calendar"></i> Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></h3>
-            <div v-for="meeting in meetings">
-                <meeting :meeting="meeting" :users="users"></meeting>
-            </div>
+        <h3><i class="fa fa-calendar"></i> Meetings <button class="pull-right btn btn-primary btn-xs" v-on:click="addNewMeeting()">+ Schedule New Meeting</button></h3>
+        <div>
+            <meeting :meeting="newMeeting" :users="users"  v-if="newMeeting"></meeting>
+        </div>
+        <div v-for="meeting in meetings">
+            <meeting :meeting="meeting" :users="users"></meeting>
+        </div>
         <div class="text-center">
             <a v-if="!showingAll" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>
             <a v-if="showingAll" v-on:click="fetchData(5)" class="btn btn-default" href="#">Show Last 5 Meetings</a>
@@ -20,7 +23,9 @@
         data(){
             return{
                 meetings: [],
-                showingAll: false
+                showingAll: false,
+                meetingTemplate: null,
+                newMeeting: null,
             }
         },
         created() {
@@ -33,6 +38,22 @@
                 this.$http.get('/api/meeting?limit=' + limit).then((response) => {
                     this.meetings = response.body;
                 });
+            },
+            addNewMeeting: function () {
+                if (this.meetingTemplate){
+                    this.newMeeting = Vue.util.extend({},this.meetingTemplate);
+                }
+                self = this;
+                if (!this.meetingTemplate){
+                    this.$http.get('/api/meeting/create').then((response) => {
+                        self.meetingTemplate = response.body;
+                        self.newMeeting = Vue.util.extend({},self.meetingTemplate);
+                    });
+                }
+            },
+            hideNewMeeting : function () {
+                this.newMeeting = null;
+                this.fetchData(5);
             }
         }
     }
