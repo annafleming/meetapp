@@ -12,7 +12,30 @@
             </div>
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
-                <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="form-group" v-bind:class="{ changed: isChanged('scheduled_at') }">
+                        <label>Meeting Date</label>
+                        <input class="form-control" type="date" v-model="meeting.scheduled_at">
+                    </div>
+                    <div class="form-group" v-bind:class="{ changed: isChanged('completed') }">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="meeting.completed"> Meeting Completed
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
+                    <label>Agenda</label>
+                    <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
+                    </div>
+
+                    <div class="form-group" v-bind:class="{ changed: isChanged('takeaways') }">
+                    <label>Takeaways</label>
+                    <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-8">
                     <div class="form-group" v-bind:class="{ changed: isChanged('users') }">
                         <label>Participants</label>
                         <multiselect
@@ -29,32 +52,6 @@
                                 track-by="id"
                         ></multiselect>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
-                    <label>Agenda</label>
-                    <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
-                    </div>
-
-                    <div class="form-group" v-bind:class="{ changed: isChanged('takeaways') }">
-                    <label>Takeaways</label>
-                    <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
-                    </div>
-
-                    <div class="form-group" v-bind:class="{ changed: isChanged('scheduled_at') }">
-                        <label>Meeting Date</label>
-                        <input class="form-control" type="date" v-model="meeting.scheduled_at">
-                    </div>
-
-                    <div class="form-group" v-bind:class="{ changed: isChanged('completed') }">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" v-model="meeting.completed"> Meeting Completed
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
                     <div class="form-group" v-bind:class="{ changed: isChanged('notes') }">
                         <label>Notes</label>
                         <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
