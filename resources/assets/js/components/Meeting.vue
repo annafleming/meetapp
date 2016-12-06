@@ -133,7 +133,7 @@
             saveMeeting: function () {
                 this.isSaving = true;
                 self = this;
-                this.$http.post('/api/meeting', self.meeting).then((response) => {
+                this.$http.put('/api/meeting/'+self.meeting.id, self.meeting).then((response) => {
                     self.oldData = Vue.util.extend({},self.meeting);
                     self.isSaving = false;
                 }, (response) => {
