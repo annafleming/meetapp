@@ -41,7 +41,12 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        Meeting::find($request->id)->update($request->all());
+        $meeting = Meeting::find($request->id);
+
+        $userIds = array_map(function($item) {return $item['id'];}, $request->get('users'));
+        $meeting->users()->sync($userIds);
+
+        $meeting->update($request->all());
     }
 
     /**

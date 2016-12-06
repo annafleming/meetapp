@@ -13,19 +13,22 @@
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
                 <div class="col-md-12">
-                    <label>Participants</label>
-                    <multiselect
-                            :options="users"
-                            :value="meeting.users"
-                            :multiple="true"
-                            :searchable="true"
-                            :close-on-select="false"
-                            :clear-on-select="false"
-                            @input="updateSelected"
-                            placeholder="Select participants"
-                            label="name"
-                            track-by="id"
-                    ></multiselect>
+                    <div class="form-group" v-bind:class="{ changed: isChanged('users') }">
+                        <label>Participants</label>
+                        <multiselect
+                                v-model="meeting.users"
+                                :options="users"
+                                :value="meeting.users"
+                                :multiple="true"
+                                :searchable="true"
+                                :close-on-select="false"
+                                :clear-on-select="false"
+                                @input="updateSelected"
+                                placeholder="Select participants"
+                                label="name"
+                                track-by="id"
+                        ></multiselect>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
