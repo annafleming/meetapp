@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder {
                 'email' => 'egreen@petsafe.net',
                 'password' => bcrypt('secret')),
             array('name'=>'Joshua Jones',
-                'email' => 'jj@petsafe.net',
+                'email' => 'joshua.jones@petsafe.net',
                 'password' => bcrypt('secret')),
             array('name'=>'Ryan Poe',
                 'email' => 'rpoe@petsafe.net',
