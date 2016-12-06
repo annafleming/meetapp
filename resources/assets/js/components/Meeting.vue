@@ -15,7 +15,7 @@
                 <div class="col-md-4">
 
                     <div class="form-group" :class="{ changed: isChanged('scheduled_at') }">
-                        <label>Meeting Date</label>
+                        <label><i class="fa fa-calendar-o"></i> Meeting Date</label>
                         <input class="form-control" type="date" v-model="meeting.scheduled_at">
                     </div>
 
@@ -28,19 +28,19 @@
                     </div>
 
                     <div class="form-group" :class="{ changed: isChanged('agenda') }">
-                    <label>Agenda</label>
+                    <label><i class="fa fa-list"></i> Agenda</label>
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
                     <div class="form-group" :class="{ changed: isChanged('takeaways') }">
-                    <label>Takeaways</label>
+                    <label><i class="fa fa-check-square-o"></i> Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
                 <div class="col-md-8">
 
                     <div class="form-group" :class="{ changed: isChanged('users') }">
-                        <label>Participants</label>
+                        <label><i class="fa fa-user-plus"></i> Participants</label>
                         <multiselect
                                 v-model="meeting.users"
                                 :options="users"
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group" :class="{ changed: isChanged('notes') }">
-                        <label>Notes</label>
+                        <label><i class="fa fa-pencil-square-o"></i> Notes</label>
                         <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
                     </div>
 
@@ -65,7 +65,10 @@
                 <div class="col-md-12">
 
                     <div class="form-group">
-                        <button class="pull-right btn btn-primary btn-s" v-on:click="saveMeeting()">Save</button>
+                        <a class="pull-right btn btn-primary btn-s save-btn" v-on:click="saveMeeting()">
+                            <i v-show="isSaving" class="fa fa-circle-o-notch fa-spin"></i>
+                            <span v-show="!isSaving">Save</span>
+                        </a>
                     </div>
                     
                 </div>
@@ -95,6 +98,9 @@
     .form-group.changed label{
         color: darkred;
     }
+    .save-btn {
+        width: 70px;
+    }
 </style>
 <script>
     import Multiselect from 'vue-multiselect';
@@ -108,6 +114,7 @@
             return {
                 folded: true,
                 oldData : Object,
+                isSaving: false
             }
         },
         created() {
@@ -124,9 +131,11 @@
         },
         methods: {
             saveMeeting: function () {
+                this.isSaving = true;
                 self = this;
                 this.$http.post('/api/meeting', self.meeting).then((response) => {
                     self.oldData = Vue.util.extend({},self.meeting);
+                    self.isSaving = false;
                 }, (response) => {
                 });
             },

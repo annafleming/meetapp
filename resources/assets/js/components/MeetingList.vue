@@ -1,6 +1,6 @@
 <template>
     <div>
-            <h3>Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></h3>
+            <h3><i class="fa fa-calendar"></i> Meetings <button class="pull-right btn btn-primary btn-xs">+ Schedule New Meeting</button></h3>
             <div v-for="meeting in meetings">
                 <meeting :meeting="meeting" :users="users"></meeting>
             </div>

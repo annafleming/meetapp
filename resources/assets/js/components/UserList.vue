@@ -1,6 +1,6 @@
 <template>
     <div>
-            <h3>Users</h3>
+            <h3><i class="fa fa-users"></i> Users</h3>
             <div class="list-group">
                 <a v-for="user in users" @click="toggleSelect(user)" type="button" class="list-group-item" :class="{ active: selectedUsers.indexOf(user) !== -1 }" href="#">{{ user.name }}</a>
             </div>

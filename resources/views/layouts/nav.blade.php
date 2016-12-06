@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="@if(Auth::check()){{ url('/home') }}@else{{ url('/') }}@endif">
-                {{ config('app.name') }}
+                <i class="fa fa-exchange"></i> {{ config('app.name') }}
             </a>
         </div>
 
