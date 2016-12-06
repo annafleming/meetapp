@@ -3,7 +3,7 @@
         <form>
         <div class="panel panel-default">
             <div class="list-group" >
-                <a href="#" class="list-group-item" v-on:click="folded = !folded" v-bind:class="{ active: !folded }">
+                <a href="#" class="list-group-item" v-on:click="folded = !folded" :class="{ active: !folded }">
                     <span class="pull-right" v-if="folded">Show</span>
                     <span class="pull-right" v-if="!folded">Hide</span>
                     <h4 class="list-group-item-heading">{{ participants }}</h4>
@@ -13,11 +13,13 @@
             <transition name="slide-fade">
             <div class="panel-body" v-show="!folded">
                 <div class="col-md-4">
-                    <div class="form-group" v-bind:class="{ changed: isChanged('scheduled_at') }">
+
+                    <div class="form-group" :class="{ changed: isChanged('scheduled_at') }">
                         <label>Meeting Date</label>
                         <input class="form-control" type="date" v-model="meeting.scheduled_at">
                     </div>
-                    <div class="form-group" v-bind:class="{ changed: isChanged('completed') }">
+
+                    <div class="form-group" :class="{ changed: isChanged('completed') }">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" v-model="meeting.completed"> Meeting Completed
@@ -25,18 +27,19 @@
                         </div>
                     </div>
 
-                    <div class="form-group" v-bind:class="{ changed: isChanged('agenda') }">
+                    <div class="form-group" :class="{ changed: isChanged('agenda') }">
                     <label>Agenda</label>
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
-                    <div class="form-group" v-bind:class="{ changed: isChanged('takeaways') }">
+                    <div class="form-group" :class="{ changed: isChanged('takeaways') }">
                     <label>Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="form-group" v-bind:class="{ changed: isChanged('users') }">
+
+                    <div class="form-group" :class="{ changed: isChanged('users') }">
                         <label>Participants</label>
                         <multiselect
                                 v-model="meeting.users"
@@ -52,15 +55,19 @@
                                 track-by="id"
                         ></multiselect>
                     </div>
-                    <div class="form-group" v-bind:class="{ changed: isChanged('notes') }">
+
+                    <div class="form-group" :class="{ changed: isChanged('notes') }">
                         <label>Notes</label>
                         <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
                     </div>
+
                 </div>
                 <div class="col-md-12">
+
                     <div class="form-group">
                         <button class="pull-right btn btn-primary btn-s" v-on:click="saveMeeting()">Save</button>
                     </div>
+                    
                 </div>
             </div>
             </transition>
