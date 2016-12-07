@@ -65,6 +65,9 @@
                 <div class="col-md-12">
 
                     <div class="form-group">
+                        <a class="pull-right btn btn-link" v-on:click="cancel()">
+                            <span v-show="!meeting.id">Cancel</span>
+                        </a>
                         <a class="pull-right btn btn-primary btn-s save-btn" v-on:click="saveMeeting()">
                             <i v-show="isSaving" class="fa fa-circle-o-notch fa-spin"></i>
                             <span v-show="!isSaving">Save</span>
@@ -151,7 +154,7 @@
             createMeeting: function () {
                 self = this;
                 this.$http.post('/api/meeting', self.meeting).then((response) => {
-                    self.$parent.hideNewMeeting();
+                    self.$parent.hideNewMeeting(true);
                 }, (response) => {
                 });
             },
@@ -160,8 +163,11 @@
                     return this.oldData[field] != this.meeting[field];
                 }
             },
-            updateSelected(value) {
+            updateSelected: function(value) {
                this.meeting.users = value;
+            },
+            cancel: function () {
+                this.$parent.hideNewMeeting(false);
             }
         }
     }

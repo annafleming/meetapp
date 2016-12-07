@@ -55,9 +55,10 @@
                     });
                 }
             },
-            hideNewMeeting : function () {
+            hideNewMeeting : function (refresh = false) {
                 this.newMeeting = null;
-                this.fetchData(this.limit);
+                if (refresh)
+                    this.fetchData(this.limit);
             }
         }
     }
