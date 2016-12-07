@@ -8,7 +8,7 @@
             <meeting :meeting="meeting" :users="users"></meeting>
         </div>
         <div class="text-center">
-            <a v-if="!showingAll" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>
+            <a v-if="!showingAll && total > limit" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>
             <a v-if="showingAll" v-on:click="fetchData(limit)" class="btn btn-default" href="#">Show Last {{ limit }} Meetings</a>
         </div>
     </div>
@@ -27,6 +27,8 @@
                 meetingTemplate: null,
                 newMeeting: null,
                 limit: 5,
+                total: 0,
+
             }
         },
         created() {
@@ -37,7 +39,8 @@
                 if (limit == null){ var limit = 0; }
                 if (limit == 0){ this.showingAll = true; } else { this.showingAll = false; }
                 this.$http.get('/api/meeting?limit=' + limit).then((response) => {
-                    this.meetings = response.body;
+                    this.meetings = response.body.meetings;
+                    this.total = response.body.total;
                 });
             },
             addNewMeeting: function () {

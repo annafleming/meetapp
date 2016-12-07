@@ -17,10 +17,14 @@ class MeetingController extends Controller
     public function index(Request $request)
     {
         $meetings = Auth::user()->meetings()->orderBy('scheduled_at', 'desc');
+        $total = $meetings->count();
         if($request->get('limit')) {
             $meetings->limit($request->get('limit'));
         }
-        return $meetings->with('users')->get();
+        return response()->json([
+            'meetings' => $meetings->with('users')->get(),
+            'total' => $total
+        ]);
     }
 
     /**
