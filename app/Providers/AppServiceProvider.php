@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('email_domain', function($attribute, $value, $parameters, $validator) {
+        \Validator::extend('email_domain', function($attribute, $value, $parameters, $validator) {
             $allowedEmailDomains = ['petsafe.net'];
             return in_array( explode('@', $parameters[0])[1] , $allowedEmailDomains);
         });
