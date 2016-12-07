@@ -9,7 +9,7 @@
         </div>
         <div class="text-center">
             <a v-if="!showingAll" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>
-            <a v-if="showingAll" v-on:click="fetchData(5)" class="btn btn-default" href="#">Show Last 5 Meetings</a>
+            <a v-if="showingAll" v-on:click="fetchData(limit)" class="btn btn-default" href="#">Show Last {{ limit }} Meetings</a>
         </div>
     </div>
 </template>
@@ -26,10 +26,11 @@
                 showingAll: false,
                 meetingTemplate: null,
                 newMeeting: null,
+                limit: 5,
             }
         },
         created() {
-            this.fetchData(5);
+            this.fetchData(this.limit);
         },
         methods: {
             fetchData: function (limit) {
@@ -53,7 +54,7 @@
             },
             hideNewMeeting : function () {
                 this.newMeeting = null;
-                this.fetchData(5);
+                this.fetchData(this.limit);
             }
         }
     }
