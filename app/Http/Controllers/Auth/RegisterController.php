@@ -49,8 +49,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|email_domain:' . $data['email'] . '|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+        ],[
+            'email.email_domain' => 'Your email address is not currently eligible.',
         ]);
     }
 
