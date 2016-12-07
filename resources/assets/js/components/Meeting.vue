@@ -28,12 +28,12 @@
                     </div>
 
                     <div class="form-group" :class="{ changed: isChanged('agenda') }">
-                    <label><i class="fa fa-list"></i> Agenda</label>
+                    <label><i class="fa fa-list-ol"></i> Agenda</label>
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
                     <div class="form-group" :class="{ changed: isChanged('takeaways') }" v-if="meeting.id">
-                    <label><i class="fa fa-check-square-o"></i> Takeaways</label>
+                    <label><i class="fa fa-list-ul"></i> Takeaways</label>
                     <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
@@ -84,7 +84,6 @@
 <style>
     .panel-heading { cursor: pointer; }
     .panel-body { overflow: hidden; }
-    .panel-body textarea { border: none; box-shadow: none; }
 
     .slide-fade-enter-active {
       transition: all .5s ease;
@@ -103,6 +102,11 @@
     }
     .save-btn {
         width: 70px;
+    }
+    .form-group .multiselect__tags {
+        border: 2px solid #dce4ec;
+        border-radius: 4px;
+        box-shadow: none;
     }
 </style>
 <script>
