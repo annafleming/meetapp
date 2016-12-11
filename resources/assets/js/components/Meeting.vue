@@ -1,37 +1,37 @@
 <template>
     <div>
         <form>
-        <div class="panel panel-default">
-            <div class="list-group" >
-                <a href="#" class="list-group-item" v-on:click="folded = !folded" :class="{ active: !folded }">
-                    <span class="pull-right" v-if="folded">Show</span>
-                    <span class="pull-right" v-if="!folded">Hide</span>
-                    <h4 class="list-group-item-heading">{{ participants || 'Add participants' }}</h4>
-                    <p class="list-group-item-text">{{ meeting.scheduled_at || 'Add meeting date' }}</p>
+        <div>
+            <div>
+                <a href="#" v-on:click="folded = !folded" :class="{ active: !folded }">
+                    <span v-if="folded">Show</span>
+                    <span v-if="!folded">Hide</span>
+                    <h4>{{ participants || 'Add participants' }}</h4>
+                    <p>{{ meeting.scheduled_at || 'Add meeting date' }}</p>
                 </a>
             </div>
             <transition name="slide-fade">
-            <div class="panel-body" v-show="!folded">
-                <div class="col-md-4">
+            <div v-show="!folded">
+                <div>
 
-                    <div class="form-group" :class="{ changed: isChanged('scheduled_at') }">
+                    <div :class="{ changed: isChanged('scheduled_at') }">
                         <label><i class="fa fa-calendar-o"></i> Meeting Date</label>
-                        <input class="form-control" type="date" v-model="meeting.scheduled_at">
+                        <input type="date" v-model="meeting.scheduled_at">
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('agenda') }">
+                    <div :class="{ changed: isChanged('agenda') }">
                     <label><i class="fa fa-list-ol"></i> Agenda</label>
-                    <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>
+                    <textarea rows="8" v-model="meeting.agenda"></textarea>
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('takeaways') }" v-if="meeting.id">
+                    <div :class="{ changed: isChanged('takeaways') }" v-if="meeting.id">
                     <label><i class="fa fa-list-ul"></i> Takeaways</label>
-                    <textarea class="form-control" rows="8" v-model="meeting.takeaways"></textarea>
+                    <textarea rows="8" v-model="meeting.takeaways"></textarea>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div>
 
-                    <div class="form-group" :class="{ changed: isChanged('users') }">
+                    <div :class="{ changed: isChanged('users') }">
                         <label><i class="fa fa-user-plus"></i> Participants</label>
                         <multiselect
                                 v-model="meeting.users"
@@ -48,19 +48,19 @@
                         ></multiselect>
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('notes') }" v-if="meeting.id">
+                    <div :class="{ changed: isChanged('notes') }" v-if="meeting.id">
                         <label><i class="fa fa-pencil-square-o"></i> Notes</label>
-                        <textarea class="form-control" rows="20" v-model="meeting.notes"></textarea>
+                        <textarea rows="20" v-model="meeting.notes"></textarea>
                     </div>
 
                 </div>
-                <div class="col-md-12">
+                <div>
 
-                    <div class="form-group">
-                        <a class="pull-right btn btn-link" v-on:click="cancel()">
+                    <div>
+                        <a v-on:click="cancel()">
                             <span v-show="!meeting.id">Cancel</span>
                         </a>
-                        <a class="pull-right btn btn-primary btn-s save-btn" v-on:click="saveMeeting()">
+                        <a v-on:click="saveMeeting()">
                             <i v-show="isSaving" class="fa fa-circle-o-notch fa-spin"></i>
                             <span v-show="!isSaving">Save</span>
                         </a>
@@ -74,9 +74,6 @@
     </div>
 </template>
 <style>
-    .panel-heading { cursor: pointer; }
-    .panel-body { overflow: hidden; }
-
     .slide-fade-enter-active {
       transition: all .5s ease;
       max-height: 1000px;
@@ -88,17 +85,6 @@
       transform: translateY(-20px);
       opacity: 0;
       max-height: 0;
-    }
-    .form-group.changed label{
-        color: darkred;
-    }
-    .save-btn {
-        width: 70px;
-    }
-    .form-group .multiselect__tags {
-        border: 2px solid #dce4ec;
-        border-radius: 4px;
-        box-shadow: none;
     }
 </style>
 <script>

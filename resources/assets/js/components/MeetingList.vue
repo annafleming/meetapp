@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3><i class="fa fa-calendar"></i> Meetings <button class="pull-right btn btn-primary btn-xs" v-on:click="addNewMeeting()">+ Schedule New Meeting</button></h3>
+        <h3><i class="fa fa-calendar"></i> Meetings <button v-on:click="addNewMeeting()">+ Schedule New Meeting</button></h3>
         <div>
             <meeting :meeting="newMeeting" :users="users"  v-if="newMeeting"></meeting>
         </div>
@@ -8,8 +8,8 @@
             <meeting :meeting="meeting" :users="users"></meeting>
         </div>
         <div class="text-center">
-            <a v-if="!showingAll && total > limit" v-on:click="fetchData(0)" class="btn btn-default" href="#">Show All Meetings</a>
-            <a v-if="showingAll" v-on:click="fetchData(limit)" class="btn btn-default" href="#">Show Last {{ limit }} Meetings</a>
+            <a v-if="!showingAll && total > limit" v-on:click="fetchData(0)" href="#">Show All Meetings</a>
+            <a v-if="showingAll" v-on:click="fetchData(limit)"  href="#">Show Last {{ limit }} Meetings</a>
         </div>
     </div>
 </template>
