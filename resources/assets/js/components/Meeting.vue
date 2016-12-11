@@ -19,14 +19,6 @@
                         <input class="form-control" type="date" v-model="meeting.scheduled_at">
                     </div>
 
-                    <div class="form-group" :class="{ changed: isChanged('completed') }" v-if="meeting.id">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" v-model="meeting.completed"> Meeting Completed
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="form-group" :class="{ changed: isChanged('agenda') }">
                     <label><i class="fa fa-list-ol"></i> Agenda</label>
                     <textarea class="form-control" rows="8" v-model="meeting.agenda"></textarea>

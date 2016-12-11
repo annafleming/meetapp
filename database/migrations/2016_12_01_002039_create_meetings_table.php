@@ -19,7 +19,6 @@ class CreateMeetingsTable extends Migration
             $table->text('agenda');
             $table->text('notes')->nullable();
             $table->text('takeaways')->nullable();
-            $table->tinyInteger('completed')->default(0);
             $table->timestamps();
         });
     }
