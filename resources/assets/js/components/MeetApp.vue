@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <div>
-            <meeting-list :users="users"></meeting-list>
+    <div class="columns">
+        <div class="column is-one-quarter">
+            <user-list :users="users"></user-list>
         </div>
 
-        <div>
-            <user-list :users="users"></user-list>
+        <div class="column">
+            <meeting-list :users="users"></meeting-list>
         </div>
     </div>
 </template>
