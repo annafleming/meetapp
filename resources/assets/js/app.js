@@ -13,8 +13,6 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.use(require('vue-resource'));
-
 Vue.component('meet-app', require('./components/MeetApp.vue'));
 
 const app = new Vue({

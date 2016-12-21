@@ -12,10 +12,10 @@
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
+    "vue": "^2.1.6"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "vue-multiselect": "next",
     "vue2-animate": "^1.0.4"
   }

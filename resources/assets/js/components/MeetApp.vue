@@ -25,8 +25,8 @@
         methods: {
             fetchData: function () {
                 self = this;
-                this.$http.get('/api/user').then((response) => {
-                    self.users = response.body;
+                axios.get('/api/user').then((response) => {
+                    self.users = response.data;
                 });
             },
         },
