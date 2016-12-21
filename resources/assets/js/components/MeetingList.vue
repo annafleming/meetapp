@@ -38,9 +38,9 @@
             fetchData: function (limit) {
                 if (limit == null){ var limit = 0; }
                 if (limit == 0){ this.showingAll = true; } else { this.showingAll = false; }
-                this.$http.get('/api/meeting?limit=' + limit).then((response) => {
-                    this.meetings = response.body.meetings;
-                    this.total = response.body.total;
+                axios.get('/api/meeting?limit=' + limit).then((response) => {
+                    this.meetings = response.data.meetings;
+                    this.total = response.data.total;
                 });
             },
             addNewMeeting: function () {
@@ -49,7 +49,7 @@
                 }
                 self = this;
                 if (!this.meetingTemplate){
-                    this.$http.get('/api/meeting/create').then((response) => {
+                    axios.get('/api/meeting/create').then((response) => {
                         self.meetingTemplate = response.body;
                         self.newMeeting = Vue.util.extend({},self.meetingTemplate);
                     });

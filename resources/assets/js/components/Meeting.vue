@@ -127,7 +127,7 @@
             },
             updateMeeting: function () {
                 self = this;
-                this.$http.put('/api/meeting/'+self.meeting.id, self.meeting).then((response) => {
+                axios.put('/api/meeting/'+self.meeting.id, self.meeting).then((response) => {
                     self.oldData = Vue.util.extend({},self.meeting);
                     self.isSaving = false;
                 }, (response) => {
@@ -135,7 +135,7 @@
             },
             createMeeting: function () {
                 self = this;
-                this.$http.post('/api/meeting', self.meeting).then((response) => {
+                axios.post('/api/meeting', self.meeting).then((response) => {
                     self.$parent.hideNewMeeting(true);
                 }, (response) => {
                 });
